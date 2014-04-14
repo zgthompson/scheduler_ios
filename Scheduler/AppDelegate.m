@@ -41,7 +41,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reportConnection) name:MeteorClientDidConnectNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reportDisconnection) name:MeteorClientDidDisconnectNotification object:nil];
     
-    [[Meteor sharedInstance] connectToURLAtString:@"wss://scheduler.meteor.com/websocket"];
+    [[Meteor sharedInstance] connect];
 }
 
 - (void)reportConnection {

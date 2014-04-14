@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CourseSearchData.h"
 
-@interface CourseSearchViewController : UITableViewController <UISearchBarDelegate>
+@interface CourseSearchViewController : UITableViewController <UISearchBarDelegate, CourseSearchDataDelegate>
 
 @end

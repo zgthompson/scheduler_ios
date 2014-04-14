@@ -38,18 +38,19 @@
     return self;
 }
 
--(void) connectToURLAtString:(NSString *) url
+-(void) connect
 {
-    ObjectiveDDP *ddp = [[ObjectiveDDP alloc] initWithURLString:url delegate:self.meteorClient];
+    ObjectiveDDP *ddp = [[ObjectiveDDP alloc] initWithURLString:@"wss://scheduler.meteor.com/websocket" delegate:self.meteorClient];
     self.meteorClient.ddp = ddp;
     [self.meteorClient.ddp connectWebSocket];
 }
 
--(void) updateCourseSearchData:(CourseSearchData *) courseSearchData WithCoursesFromQuery:(NSString* ) query
+-(void) coursesForQuery:(NSString *)query
 {
     [self.meteorClient callMethodName:@"coursesForQuery" parameters:@[query] responseCallback:^(NSDictionary *response, NSError *error) {
+        NSLog(@"%@", response);
         NSLog(@"%@", error);
-        [courseSearchData updateWithDict:response];
+        [self.delegate acceptCourseSearchResponse:response];
     }];
 }
 

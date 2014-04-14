@@ -7,12 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CourseSearchData.h"
+
+@protocol MeteorCourseSearchDelegate;
 
 @interface Meteor : NSObject
 
+@property (nonatomic) id<MeteorCourseSearchDelegate> delegate;
+
 +(Meteor *) sharedInstance;
--(void) connectToURLAtString:(NSString *) url;
--(void) updateCourseSearchData:(CourseSearchData *) courseSearchData WithCoursesFromQuery:(NSString* ) query;
+-(void) connect;
+-(void) coursesForQuery:(NSString* ) query;
+
+@end
+
+@protocol MeteorCourseSearchDelegate<NSObject>
+
+-(void) acceptCourseSearchResponse:(NSDictionary *) response;
 
 @end

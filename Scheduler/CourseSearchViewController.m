@@ -13,7 +13,6 @@
 @interface CourseSearchViewController ()
 
 @property (nonatomic) CourseSearchData *courseSearchData;
-@property (nonatomic) Meteor *meteor;
 
 @end
 
@@ -37,8 +36,8 @@ static NSString *CellIdentifier = @"Cell";
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    self.courseSearchData = [[CourseSearchData alloc] init];
-    self.meteor = [Meteor sharedInstance];
+    self.courseSearchData = [CourseSearchData sharedInstance];
+    [self.courseSearchData setDelegate:self];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -85,7 +84,14 @@ static NSString *CellIdentifier = @"Cell";
 #pragma mark - Search submission
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self.meteor updateCourseSearchData:self.courseSearchData WithCoursesFromQuery:[searchBar text]];
+    [self.courseSearchData coursesForQuery:[searchBar text]];
+}
+
+#pragma mark - Course Search Data Delegate methods
+
+-(void) courseSearchDataUpdated
+{
+    [self.tableView reloadData];
 }
 
 /*

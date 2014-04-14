@@ -12,10 +12,22 @@
 
 @property (nonatomic) NSArray *courses;
 @property (nonatomic) NSArray *filters;
+@property (nonatomic) Meteor *meteor;
 
 @end
 
 @implementation CourseSearchData
+
+#pragma mark - Singleton methods
+
++(CourseSearchData *) sharedInstance
+{
+    static CourseSearchData *instance = nil;
+    if (! instance) {
+        instance = [[CourseSearchData alloc] init];
+    }
+    return instance;
+}
 
 -(instancetype) init
 {
@@ -24,15 +36,14 @@
     if (self) {
         self.courses = @[@[[[Course alloc] init]]];
         self.filters = @[[[Filter alloc] init]];
+        self.meteor = [Meteor sharedInstance];
+        [self.meteor setDelegate:self];
     }
     
     return self;
 }
 
--(void) updateWithDict: (NSDictionary *) dict
-{
-    return;
-}
+#pragma mark - Data access methods
 
 -(Filter *) filterAtIndex:(int)index
 {
@@ -52,6 +63,26 @@
 -(int) courseCountAtIndex:(int)index
 {
     return [[self.courses objectAtIndex:index] count];
+}
+
+#pragma mark - Meteor interactions
+
+-(void) coursesForQuery:(NSString *)query
+{
+    [self.meteor coursesForQuery:query];
+}
+
+#pragma mark - Course Search Delegate Methods and helpers
+
+-(void) acceptCourseSearchResponse:(NSDictionary *)response
+{
+    [self updateWithDict:response];
+    [self.delegate courseSearchDataUpdated];
+}
+
+-(void) updateWithDict: (NSDictionary *) dict
+{
+    return;
 }
 
 @end
