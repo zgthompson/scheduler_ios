@@ -10,8 +10,8 @@
 
 @interface CourseSearchData()
 
-@property (nonatomic) NSArray *courses;
-@property (nonatomic) NSArray *filters;
+@property (nonatomic) NSMutableArray *courses;
+@property (nonatomic) NSMutableArray *filters;
 @property (nonatomic) Meteor *meteor;
 
 @end
@@ -34,8 +34,8 @@
     self = [super init];
     
     if (self) {
-        self.courses = @[@[[[Course alloc] init]]];
-        self.filters = @[[[Filter alloc] init]];
+        self.courses = [NSMutableArray array];
+        self.filters = [NSMutableArray array];
         self.meteor = [Meteor sharedInstance];
         [self.meteor setDelegate:self];
     }
@@ -74,15 +74,31 @@
 
 #pragma mark - Course Search Delegate Methods and helpers
 
--(void) acceptCourseSearchResponse:(NSDictionary *)response
+-(void) acceptCourseSearchResults:(NSDictionary *)response
 {
-    [self updateWithDict:response];
+    [self resetFiltersAndCourses];
+    
+    for (NSDictionary *queryResult in response) {
+        [self addFilterFromDict:[queryResult objectForKey:@"filter"]];
+        [self addCourseArrayFromArray:[queryResult objectForKey:@"results"]];
+    }
+    
     [self.delegate courseSearchDataUpdated];
 }
 
--(void) updateWithDict: (NSDictionary *) dict
+-(void) resetFiltersAndCourses
 {
-    return;
+    self.filters = [NSMutableArray array];
+    self.courses = [NSMutableArray array];
 }
+
+-(void) addFilterFromDict: (NSDictionary *) filterDict {
+    [self.filters addObject:[[Filter alloc] initWithDict:filterDict]];
+}
+
+-(void) addCourseArrayFromArray: (NSArray *) courseArray {
+    [self.courses addObject:@[ [[Course alloc] init] ]];
+}
+
 
 @end

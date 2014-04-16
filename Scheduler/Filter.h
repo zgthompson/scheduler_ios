@@ -10,4 +10,6 @@
 
 @interface Filter : NSObject
 
+-(instancetype) initWithDict:(NSDictionary *) filterDict;
+
 @end

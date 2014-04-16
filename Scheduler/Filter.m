@@ -8,11 +8,33 @@
 
 #import "Filter.h"
 
+@interface Filter()
+
+@property (nonatomic) NSDictionary *filterDict;
+
+@end
+
 @implementation Filter
+
+-(instancetype) initWithDict:(NSDictionary *)filterDict
+{
+    self = [super init];
+        
+    if (self) {
+        self.filterDict = filterDict;
+    }
+    
+    return self;
+}
 
 -(NSString *) description
 {
-    return @"Filter string";
+    NSMutableArray *stringBuilder = [NSMutableArray array];
+    for (id key in self.filterDict) {
+        NSString *filterString = [[NSString alloc] initWithFormat:@"%@: %@", key, [self.filterDict objectForKey:key]];
+        [stringBuilder addObject:filterString];
+    }
+    return [stringBuilder componentsJoinedByString:@", "];
 }
 
 @end

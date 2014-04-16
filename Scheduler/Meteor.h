@@ -22,6 +22,6 @@
 
 @protocol MeteorCourseSearchDelegate<NSObject>
 
--(void) acceptCourseSearchResponse:(NSDictionary *) response;
+-(void) acceptCourseSearchResults:(NSDictionary *) response;
 
 @end

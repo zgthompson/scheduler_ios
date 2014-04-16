@@ -48,9 +48,10 @@
 -(void) coursesForQuery:(NSString *)query
 {
     [self.meteorClient callMethodName:@"coursesForQuery" parameters:@[query] responseCallback:^(NSDictionary *response, NSError *error) {
-        NSLog(@"%@", response);
-        NSLog(@"%@", error);
-        [self.delegate acceptCourseSearchResponse:response];
+        if (error) {
+            NSLog(@"%@", error);
+        }
+        [self.delegate acceptCourseSearchResults:[response objectForKey:@"result"]];
     }];
 }
 
