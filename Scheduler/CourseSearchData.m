@@ -96,8 +96,12 @@
     [self.filters addObject:[[Filter alloc] initWithDict:filterDict]];
 }
 
--(void) addCourseArrayFromArray: (NSArray *) courseArray {
-    [self.courses addObject:@[ [[Course alloc] init] ]];
+-(void) addCourseArrayFromArray: (NSArray *) courseDictArray {
+    NSMutableArray *courseArray = [NSMutableArray array];
+    for (NSDictionary *courseDict in courseDictArray) {
+        [courseArray addObject:[[Course alloc] initWithDict:courseDict]];
+    }
+    [self.courses addObject:courseArray];
 }
 
 

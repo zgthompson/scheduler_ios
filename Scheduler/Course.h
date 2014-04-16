@@ -10,6 +10,9 @@
 
 @interface Course : NSObject
 
+-(instancetype) initWithDict:(NSDictionary *) courseDict;
 -(NSString *) title;
+-(NSString *) subjectWithNumber;
+-(NSString *) units;
 
 @end

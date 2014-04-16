@@ -8,6 +8,7 @@
 
 #import "CourseSearchViewController.h"
 #import "CourseSearchData.h"
+#import "CourseCell.h"
 #import "Meteor.h"
 
 @interface CourseSearchViewController ()
@@ -24,9 +25,8 @@ static NSString *CellIdentifier = @"Cell";
 {
     self = [super initWithStyle:style];
     if (self) {
-        /*
-         custom code
-         */
+        self.courseSearchData = [CourseSearchData sharedInstance];
+        [self.courseSearchData setDelegate:self];
         }
     return self;
 }
@@ -35,10 +35,16 @@ static NSString *CellIdentifier = @"Cell";
 {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    self.courseSearchData = [CourseSearchData sharedInstance];
-    [self.courseSearchData setDelegate:self];
-
+    [self.tableView registerClass:[CourseCell class] forCellReuseIdentifier:CellIdentifier];
+    
+    [self setTitle:@"Course Search"];
+    
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [searchBar setDelegate:self];
+    [self.tableView setTableHeaderView:searchBar];
+    
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -76,7 +82,9 @@ static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     Course *curCourse = [self.courseSearchData courseNumber:[indexPath row] atIndex:[indexPath section]];
-    [cell.textLabel setText:[curCourse title]];
+    
+    [cell.textLabel setText:[curCourse subjectWithNumber]];
+    [cell.detailTextLabel setText:[curCourse title]];
     
     return cell;
 }
@@ -85,6 +93,7 @@ static NSString *CellIdentifier = @"Cell";
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.courseSearchData coursesForQuery:[searchBar text]];
+    [searchBar resignFirstResponder];
 }
 
 #pragma mark - Course Search Data Delegate methods

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F012A7B18FF14E30058C4D7 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F012A7A18FF14E30058C4D7 /* CourseCell.m */; };
 		3F704BFF18FB04DE005CB70D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F704BFE18FB04DE005CB70D /* Foundation.framework */; };
 		3F704C0118FB04DE005CB70D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F704C0018FB04DE005CB70D /* CoreGraphics.framework */; };
 		3F704C0318FB04DE005CB70D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F704C0218FB04DE005CB70D /* UIKit.framework */; };
@@ -36,7 +37,6 @@
 		3F704CA918FB154B005CB70D /* CourseSearchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F704CA818FB154B005CB70D /* CourseSearchData.m */; };
 		3F704CAD18FB1A8D005CB70D /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F704CAC18FB1A8D005CB70D /* Course.m */; };
 		3F704CB018FB1A99005CB70D /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F704CAF18FB1A99005CB70D /* Filter.m */; };
-		3F704CB218FB3757005CB70D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F704CB118FB3757005CB70D /* MainStoryboard.storyboard */; };
 		3F704CB618FB4465005CB70D /* Meteor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F704CB518FB4465005CB70D /* Meteor.m */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F012A7918FF14E30058C4D7 /* CourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCell.h; sourceTree = "<group>"; };
+		3F012A7A18FF14E30058C4D7 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCell.m; sourceTree = "<group>"; };
 		3F704BFB18FB04DE005CB70D /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F704BFE18FB04DE005CB70D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3F704C0018FB04DE005CB70D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -173,7 +175,6 @@
 		3F704CAC18FB1A8D005CB70D /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		3F704CAE18FB1A99005CB70D /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filter.h; sourceTree = "<group>"; };
 		3F704CAF18FB1A99005CB70D /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filter.m; sourceTree = "<group>"; };
-		3F704CB118FB3757005CB70D /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		3F704CB418FB4465005CB70D /* Meteor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meteor.h; sourceTree = "<group>"; };
 		3F704CB518FB4465005CB70D /* Meteor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Meteor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -246,7 +247,6 @@
 				3F704CAA18FB1557005CB70D /* CourseSearch */,
 				3F704C0D18FB04DF005CB70D /* AppDelegate.h */,
 				3F704C0E18FB04DF005CB70D /* AppDelegate.m */,
-				3F704CB118FB3757005CB70D /* MainStoryboard.storyboard */,
 				3F704C8F18FB07E8005CB70D /* SocketRocket */,
 				3F704C2D18FB07CF005CB70D /* ObjectiveDDP */,
 				3F704C1018FB04DF005CB70D /* Images.xcassets */,
@@ -414,6 +414,8 @@
 			children = (
 				3F704CA418FB13BE005CB70D /* CourseSearchViewController.h */,
 				3F704CA518FB13BE005CB70D /* CourseSearchViewController.m */,
+				3F012A7918FF14E30058C4D7 /* CourseCell.h */,
+				3F012A7A18FF14E30058C4D7 /* CourseCell.m */,
 				3F704CA718FB154B005CB70D /* CourseSearchData.h */,
 				3F704CA818FB154B005CB70D /* CourseSearchData.m */,
 				3F704CAB18FB1A8C005CB70D /* Course.h */,
@@ -508,7 +510,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F704CB218FB3757005CB70D /* MainStoryboard.storyboard in Resources */,
 				3F704C0918FB04DF005CB70D /* InfoPlist.strings in Resources */,
 				3F704C1118FB04DF005CB70D /* Images.xcassets in Resources */,
 			);
@@ -533,6 +534,7 @@
 				3F704C9818FB07E8005CB70D /* NSData+SRB64Additions.m in Sources */,
 				3F704CA618FB13BE005CB70D /* CourseSearchViewController.m in Sources */,
 				3F704C0F18FB04DF005CB70D /* AppDelegate.m in Sources */,
+				3F012A7B18FF14E30058C4D7 /* CourseCell.m in Sources */,
 				3F704CB018FB1A99005CB70D /* Filter.m in Sources */,
 				3F704C8D18FB07CF005CB70D /* ObjectiveDDP.m in Sources */,
 				3F704CA918FB154B005CB70D /* CourseSearchData.m in Sources */,

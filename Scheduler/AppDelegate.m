@@ -19,7 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /*
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     CourseSearchViewController *searchController = [[CourseSearchViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -29,7 +28,6 @@
     [self.window setRootViewController:nav];
     
     [self.window makeKeyAndVisible];
-     */
     
     [self connectToServer];
 
