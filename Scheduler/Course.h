@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Section.h"
 
 @interface Course : NSObject
 
@@ -14,5 +15,9 @@
 -(NSString *) title;
 -(NSString *) subjectWithNumber;
 -(NSString *) units;
+-(int) classCount;
+-(int) sectionCountForClass:(int)classNum;
+-(NSString *) classDescriptionForClass:(int)classNum;
+-(Section *) section:(int)sectionNum ForClass:(int)classNum;
 
 @end

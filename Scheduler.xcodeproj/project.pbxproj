@@ -38,6 +38,8 @@
 		3F704CAD18FB1A8D005CB70D /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F704CAC18FB1A8D005CB70D /* Course.m */; };
 		3F704CB018FB1A99005CB70D /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F704CAF18FB1A99005CB70D /* Filter.m */; };
 		3F704CB618FB4465005CB70D /* Meteor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F704CB518FB4465005CB70D /* Meteor.m */; };
+		3FFF60D91905A59200BA1E1C /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF60D81905A59200BA1E1C /* CourseDetailViewController.m */; };
+		3FFF60DC1905A91200BA1E1C /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF60DB1905A91200BA1E1C /* Section.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +179,10 @@
 		3F704CAF18FB1A99005CB70D /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filter.m; sourceTree = "<group>"; };
 		3F704CB418FB4465005CB70D /* Meteor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meteor.h; sourceTree = "<group>"; };
 		3F704CB518FB4465005CB70D /* Meteor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Meteor.m; sourceTree = "<group>"; };
+		3FFF60D71905A59200BA1E1C /* CourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailViewController.h; sourceTree = "<group>"; };
+		3FFF60D81905A59200BA1E1C /* CourseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailViewController.m; sourceTree = "<group>"; };
+		3FFF60DA1905A91200BA1E1C /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
+		3FFF60DB1905A91200BA1E1C /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -412,6 +418,8 @@
 		3F704CAA18FB1557005CB70D /* CourseSearch */ = {
 			isa = PBXGroup;
 			children = (
+				3FFF60D71905A59200BA1E1C /* CourseDetailViewController.h */,
+				3FFF60D81905A59200BA1E1C /* CourseDetailViewController.m */,
 				3F704CA418FB13BE005CB70D /* CourseSearchViewController.h */,
 				3F704CA518FB13BE005CB70D /* CourseSearchViewController.m */,
 				3F012A7918FF14E30058C4D7 /* CourseCell.h */,
@@ -422,6 +430,8 @@
 				3F704CAC18FB1A8D005CB70D /* Course.m */,
 				3F704CAE18FB1A99005CB70D /* Filter.h */,
 				3F704CAF18FB1A99005CB70D /* Filter.m */,
+				3FFF60DA1905A91200BA1E1C /* Section.h */,
+				3FFF60DB1905A91200BA1E1C /* Section.m */,
 			);
 			name = CourseSearch;
 			sourceTree = "<group>";
@@ -534,6 +544,7 @@
 				3F704C9818FB07E8005CB70D /* NSData+SRB64Additions.m in Sources */,
 				3F704CA618FB13BE005CB70D /* CourseSearchViewController.m in Sources */,
 				3F704C0F18FB04DF005CB70D /* AppDelegate.m in Sources */,
+				3FFF60D91905A59200BA1E1C /* CourseDetailViewController.m in Sources */,
 				3F012A7B18FF14E30058C4D7 /* CourseCell.m in Sources */,
 				3F704CB018FB1A99005CB70D /* Filter.m in Sources */,
 				3F704C8D18FB07CF005CB70D /* ObjectiveDDP.m in Sources */,
@@ -543,6 +554,7 @@
 				3F704C9918FB07E8005CB70D /* SRWebSocket.m in Sources */,
 				3F704C9718FB07E8005CB70D /* base64.c in Sources */,
 				3F704C8C18FB07CF005CB70D /* MeteorClient.m in Sources */,
+				3FFF60DC1905A91200BA1E1C /* Section.m in Sources */,
 				3F704C8B18FB07CF005CB70D /* MeteorClient+Parsing.m in Sources */,
 				3F704C0B18FB04DF005CB70D /* main.m in Sources */,
 				3F704C8818FB07CF005CB70D /* BSONIdGenerator.m in Sources */,

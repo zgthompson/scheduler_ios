@@ -44,4 +44,25 @@
     return [self.courseDict objectForKey:@"units"];
 }
 
+-(int) classCount
+{
+    return [[self.courseDict objectForKey:@"classes"] count];
+}
+-(int) sectionCountForClass:(int)classNum
+{
+    NSDictionary *classDict = [[self.courseDict objectForKey:@"classes"] objectAtIndex:classNum];
+    return [[classDict objectForKey:@"sections"] count];
+}
+-(NSString *) classDescriptionForClass:(int)classNum
+{
+    NSDictionary *classDict = [[self.courseDict objectForKey:@"classes"] objectAtIndex:classNum];
+    return [NSString stringWithFormat:@"Section %@", [classDict objectForKey:@"number"]];
+}
+-(Section *) section:(int)sectionNum ForClass:(int)classNum
+{
+    NSDictionary *classDict = [[self.courseDict objectForKey:@"classes"] objectAtIndex:classNum];
+    NSDictionary *sectionDict = [[classDict objectForKey:@"sections"] objectAtIndex:sectionNum];
+    return [[Section alloc] initWithDict:sectionDict];
+}
+
 @end

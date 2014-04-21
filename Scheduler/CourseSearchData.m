@@ -104,5 +104,4 @@
     [self.courses addObject:courseArray];
 }
 
-
 @end

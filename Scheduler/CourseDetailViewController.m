@@ -1,34 +1,39 @@
 //
-//  CourseSearchViewController.m
+//  CourseDetailViewController.m
 //  Scheduler
 //
-//  Created by student on 4/13/14.
+//  Created by student on 4/21/14.
 //  Copyright (c) 2014 SSU. All rights reserved.
 //
 
-#import "CourseSearchViewController.h"
 #import "CourseDetailViewController.h"
 #import "CourseSearchData.h"
 #import "CourseCell.h"
-#import "Meteor.h"
 
-@interface CourseSearchViewController ()
+@interface CourseDetailViewController ()
 
-@property (nonatomic) CourseSearchData *courseSearchData;
+@property (nonatomic) Course *course;
 
 @end
 
 static NSString *CellIdentifier = @"Cell";
 
-@implementation CourseSearchViewController
+@implementation CourseDetailViewController
+
+- (id)initWithCourse:(Course *)course andStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:style];
+    if (self) {
+        self.course = course;
+    }
+    return self;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.courseSearchData = [CourseSearchData sharedInstance];
-        [self.courseSearchData setDelegate:self];
-        }
+        // Custom initialization
+    }
     return self;
 }
 
@@ -38,14 +43,8 @@ static NSString *CellIdentifier = @"Cell";
     
     [self.tableView registerClass:[CourseCell class] forCellReuseIdentifier:CellIdentifier];
     
-    [self setTitle:@"Course Search"];
-    
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    [searchBar setDelegate:self];
-    [self.tableView setTableHeaderView:searchBar];
-    
-    
-    
+    [self setTitle:[self.course subjectWithNumber]];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -64,51 +63,34 @@ static NSString *CellIdentifier = @"Cell";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [self.courseSearchData filterCount];
+    return [self.course classCount];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)tableSection
 {
     // Return the number of rows in the section.
-    return [self.courseSearchData courseCountAtIndex:section];
+    return [self.course sectionCountForClass:tableSection];
 }
 
--(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+-(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)tableSection
 {
-    return [[self.courseSearchData filterAtIndex:section] description];
+    return [self.course classDescriptionForClass:tableSection];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    Course *curCourse = [self.courseSearchData courseNumber:[indexPath row] atIndex:[indexPath section]];
+    // Configure the cell...
+    Section *section = [self.course section:[indexPath row] ForClass:[indexPath section]];
     
-    [cell.textLabel setText:[curCourse subjectWithNumber]];
-    [cell.detailTextLabel setText:[curCourse title]];
+    [cell.textLabel setText:[section timeString]];
+    
+    NSString *detailString = [NSString stringWithFormat:@"%@, %@, %@", [section locations], [section professors], [section type]];
+    
+    [cell.detailTextLabel setText:detailString];
     
     return cell;
-}
-
-#pragma mark - Search submission
-
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self.courseSearchData coursesForQuery:[searchBar text]];
-    [searchBar resignFirstResponder];
-}
-
-#pragma mark - Course Search Data Delegate methods
-
--(void) courseSearchDataUpdated
-{
-    [self.tableView reloadData];
-}
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    Course *course = [self.courseSearchData courseNumber:[indexPath row] atIndex:[indexPath section]];
-    CourseDetailViewController *courseDetail = [[CourseDetailViewController alloc] initWithCourse:course andStyle:UITableViewStylePlain];
-    [self.navigationController pushViewController:courseDetail animated:YES];
 }
 
 /*
