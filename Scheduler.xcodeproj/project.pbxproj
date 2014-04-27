@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3F012A7B18FF14E30058C4D7 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F012A7A18FF14E30058C4D7 /* CourseCell.m */; };
+		3F0657F5190D949A005C7C90 /* RoundedGroupedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0657F4190D949A005C7C90 /* RoundedGroupedTableViewController.m */; };
+		3F0657FB190DA9FE005C7C90 /* star_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0657FA190DA9FE005C7C90 /* star_empty.png */; };
+		3F0657FD190DAA12005C7C90 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0657FC190DAA12005C7C90 /* star.png */; };
+		3F0657FF190DAA18005C7C90 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0657FE190DAA18005C7C90 /* blank.png */; };
+		3F065803190DAFE2005C7C90 /* CourseFavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F065802190DAFE2005C7C90 /* CourseFavoriteViewController.m */; };
+		3F065806190DB544005C7C90 /* CourseFavoriteData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F065805190DB544005C7C90 /* CourseFavoriteData.m */; };
+		3F065809190DC44E005C7C90 /* UIButtonWithIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F065808190DC44E005C7C90 /* UIButtonWithIndexPath.m */; };
 		3F704BFF18FB04DE005CB70D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F704BFE18FB04DE005CB70D /* Foundation.framework */; };
 		3F704C0118FB04DE005CB70D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F704C0018FB04DE005CB70D /* CoreGraphics.framework */; };
 		3F704C0318FB04DE005CB70D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F704C0218FB04DE005CB70D /* UIKit.framework */; };
@@ -55,6 +62,17 @@
 /* Begin PBXFileReference section */
 		3F012A7918FF14E30058C4D7 /* CourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCell.h; sourceTree = "<group>"; };
 		3F012A7A18FF14E30058C4D7 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCell.m; sourceTree = "<group>"; };
+		3F0657F3190D949A005C7C90 /* RoundedGroupedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedGroupedTableViewController.h; sourceTree = "<group>"; };
+		3F0657F4190D949A005C7C90 /* RoundedGroupedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedGroupedTableViewController.m; sourceTree = "<group>"; };
+		3F0657FA190DA9FE005C7C90 /* star_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_empty.png; sourceTree = "<group>"; };
+		3F0657FC190DAA12005C7C90 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		3F0657FE190DAA18005C7C90 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
+		3F065801190DAFE2005C7C90 /* CourseFavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseFavoriteViewController.h; sourceTree = "<group>"; };
+		3F065802190DAFE2005C7C90 /* CourseFavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseFavoriteViewController.m; sourceTree = "<group>"; };
+		3F065804190DB544005C7C90 /* CourseFavoriteData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseFavoriteData.h; sourceTree = "<group>"; };
+		3F065805190DB544005C7C90 /* CourseFavoriteData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseFavoriteData.m; sourceTree = "<group>"; };
+		3F065807190DC44E005C7C90 /* UIButtonWithIndexPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonWithIndexPath.h; sourceTree = "<group>"; };
+		3F065808190DC44E005C7C90 /* UIButtonWithIndexPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonWithIndexPath.m; sourceTree = "<group>"; };
 		3F704BFB18FB04DE005CB70D /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F704BFE18FB04DE005CB70D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3F704C0018FB04DE005CB70D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -213,6 +231,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F065800190DAFC3005C7C90 /* CourseFavorite */ = {
+			isa = PBXGroup;
+			children = (
+				3F065801190DAFE2005C7C90 /* CourseFavoriteViewController.h */,
+				3F065802190DAFE2005C7C90 /* CourseFavoriteViewController.m */,
+				3F065804190DB544005C7C90 /* CourseFavoriteData.h */,
+				3F065805190DB544005C7C90 /* CourseFavoriteData.m */,
+			);
+			name = CourseFavorite;
+			sourceTree = "<group>";
+		};
 		3F704BF218FB04DE005CB70D = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +278,7 @@
 		3F704C0418FB04DE005CB70D /* Scheduler */ = {
 			isa = PBXGroup;
 			children = (
+				3F065800190DAFC3005C7C90 /* CourseFavorite */,
 				3F704CB318FB43EF005CB70D /* Meteor */,
 				3F704CAA18FB1557005CB70D /* CourseSearch */,
 				3F704C0D18FB04DF005CB70D /* AppDelegate.h */,
@@ -266,8 +296,11 @@
 			children = (
 				3F704C0618FB04DE005CB70D /* Scheduler-Info.plist */,
 				3F704C0718FB04DF005CB70D /* InfoPlist.strings */,
+				3F0657FE190DAA18005C7C90 /* blank.png */,
 				3F704C0A18FB04DF005CB70D /* main.m */,
+				3F0657FC190DAA12005C7C90 /* star.png */,
 				3F704C0C18FB04DF005CB70D /* Scheduler-Prefix.pch */,
+				3F0657FA190DA9FE005C7C90 /* star_empty.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -418,10 +451,14 @@
 		3F704CAA18FB1557005CB70D /* CourseSearch */ = {
 			isa = PBXGroup;
 			children = (
+				3F0657F3190D949A005C7C90 /* RoundedGroupedTableViewController.h */,
+				3F0657F4190D949A005C7C90 /* RoundedGroupedTableViewController.m */,
 				3FFF60D71905A59200BA1E1C /* CourseDetailViewController.h */,
 				3FFF60D81905A59200BA1E1C /* CourseDetailViewController.m */,
 				3F704CA418FB13BE005CB70D /* CourseSearchViewController.h */,
 				3F704CA518FB13BE005CB70D /* CourseSearchViewController.m */,
+				3F065807190DC44E005C7C90 /* UIButtonWithIndexPath.h */,
+				3F065808190DC44E005C7C90 /* UIButtonWithIndexPath.m */,
 				3F012A7918FF14E30058C4D7 /* CourseCell.h */,
 				3F012A7A18FF14E30058C4D7 /* CourseCell.m */,
 				3F704CA718FB154B005CB70D /* CourseSearchData.h */,
@@ -520,8 +557,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0657FB190DA9FE005C7C90 /* star_empty.png in Resources */,
+				3F0657FD190DAA12005C7C90 /* star.png in Resources */,
 				3F704C0918FB04DF005CB70D /* InfoPlist.strings in Resources */,
 				3F704C1118FB04DF005CB70D /* Images.xcassets in Resources */,
+				3F0657FF190DAA18005C7C90 /* blank.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,12 +586,16 @@
 				3F704C0F18FB04DF005CB70D /* AppDelegate.m in Sources */,
 				3FFF60D91905A59200BA1E1C /* CourseDetailViewController.m in Sources */,
 				3F012A7B18FF14E30058C4D7 /* CourseCell.m in Sources */,
+				3F065809190DC44E005C7C90 /* UIButtonWithIndexPath.m in Sources */,
 				3F704CB018FB1A99005CB70D /* Filter.m in Sources */,
 				3F704C8D18FB07CF005CB70D /* ObjectiveDDP.m in Sources */,
+				3F0657F5190D949A005C7C90 /* RoundedGroupedTableViewController.m in Sources */,
 				3F704CA918FB154B005CB70D /* CourseSearchData.m in Sources */,
 				3F704C8918FB07CF005CB70D /* DependencyProvider.m in Sources */,
 				3F704C8E18FB07CF005CB70D /* srp.c in Sources */,
+				3F065806190DB544005C7C90 /* CourseFavoriteData.m in Sources */,
 				3F704C9918FB07E8005CB70D /* SRWebSocket.m in Sources */,
+				3F065803190DAFE2005C7C90 /* CourseFavoriteViewController.m in Sources */,
 				3F704C9718FB07E8005CB70D /* base64.c in Sources */,
 				3F704C8C18FB07CF005CB70D /* MeteorClient.m in Sources */,
 				3FFF60DC1905A91200BA1E1C /* Section.m in Sources */,
@@ -688,11 +732,9 @@
 					"$(SRCROOT)/**",
 				);
 				INFOPLIST_FILE = "Scheduler/Scheduler-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/student/Documents/scheduler_ios/Scheduler/ObjectiveDDP,
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -711,11 +753,9 @@
 					"$(SRCROOT)/**",
 				);
 				INFOPLIST_FILE = "Scheduler/Scheduler-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/student/Documents/scheduler_ios/Scheduler/ObjectiveDDP,
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

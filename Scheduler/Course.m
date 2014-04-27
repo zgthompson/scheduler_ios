@@ -8,12 +8,6 @@
 
 #import "Course.h"
 
-@interface Course()
-
-@property (nonatomic) NSDictionary *courseDict;
-
-@end
-
 @implementation Course
 
 -(instancetype) initWithDict:(NSDictionary *)courseDict
@@ -23,8 +17,6 @@
     if (self) {
         self.courseDict = courseDict;
     }
-    
-    NSLog(@"%@", courseDict);
     
     return self;
 }

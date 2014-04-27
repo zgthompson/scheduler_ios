@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Course.h"
+#import "RoundedGroupedTableViewController.h"
 
-@interface CourseDetailViewController : UITableViewController
+@interface CourseDetailViewController : RoundedGroupedTableViewController
 
-- (id)initWithCourse:(Course *)course andStyle:(UITableViewStyle)style;
+- (id)initWithCourse:(Course *)course;
 
 @end

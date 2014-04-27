@@ -20,8 +20,8 @@ static NSString *CellIdentifier = @"Cell";
 
 @implementation CourseDetailViewController
 
-- (id)initWithCourse:(Course *)course andStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
+- (id)initWithCourse:(Course *)course {
+    self = [super init];
     if (self) {
         self.course = course;
     }
@@ -77,13 +77,19 @@ static NSString *CellIdentifier = @"Cell";
     return [self.course classDescriptionForClass:tableSection];
 }
 
+-(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 10;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     Section *section = [self.course section:[indexPath row] ForClass:[indexPath section]];
-    
+    [cell.textLabel setNumberOfLines:0];
+    [cell.textLabel setFont:[UIFont systemFontOfSize:12]];
     [cell.textLabel setText:[section timeString]];
     
     NSString *detailString = [NSString stringWithFormat:@"%@, %@, %@", [section locations], [section professors], [section type]];
@@ -92,56 +98,5 @@ static NSString *CellIdentifier = @"Cell";
     
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 @end

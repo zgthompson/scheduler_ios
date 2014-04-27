@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CourseSearchData.h"
+#import "RoundedGroupedTableViewController.h"
 
-@interface CourseSearchViewController : UITableViewController <UISearchBarDelegate, CourseSearchDataDelegate>
+@interface CourseSearchViewController :  RoundedGroupedTableViewController<UISearchBarDelegate, CourseSearchDataDelegate>
 
 @end

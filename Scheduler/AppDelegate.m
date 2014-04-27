@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CourseSearchViewController.h"
+#import "CourseFavoriteViewController.h"
 #import "Meteor.h"
 #import "ObjectiveDDP/MeteorClient.h"
 #import "ObjectiveDDP/ObjectiveDDP.h"
@@ -21,9 +22,13 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    CourseSearchViewController *searchController = [[CourseSearchViewController alloc] initWithStyle:UITableViewStylePlain];
+    CourseSearchViewController *searchController = [[CourseSearchViewController alloc] init];
+    CourseFavoriteViewController *favoriteController = [[CourseFavoriteViewController alloc] init];
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:searchController];
+    UITabBarController *tabController = [[UITabBarController alloc] init];
+    [tabController setViewControllers:@[searchController, favoriteController]];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tabController];
     
     [self.window setRootViewController:nav];
     

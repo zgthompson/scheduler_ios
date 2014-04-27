@@ -9,18 +9,37 @@
 #import "CourseSearchViewController.h"
 #import "CourseDetailViewController.h"
 #import "CourseSearchData.h"
+#import "CourseFavoriteData.h"
 #import "CourseCell.h"
+#import "UIButtonWithIndexPath.h"
 #import "Meteor.h"
 
 @interface CourseSearchViewController ()
 
 @property (nonatomic) CourseSearchData *courseSearchData;
+@property (nonatomic) CourseFavoriteData *courseFavoriteData;
 
 @end
 
 static NSString *CellIdentifier = @"Cell";
 
 @implementation CourseSearchViewController
+
+-(id)init
+{
+    self = [super init];
+    if (self) {
+        self.courseSearchData = [CourseSearchData sharedInstance];
+        [self.courseSearchData setDelegate:self];
+        
+        self.courseFavoriteData = [CourseFavoriteData sharedInstance];
+        
+        UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:1];
+        [tabBarItem setTitle:@"Course Search"];
+        [self setTabBarItem:tabBarItem];
+    }
+    return self;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,15 +55,13 @@ static NSString *CellIdentifier = @"Cell";
 {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[CourseCell class] forCellReuseIdentifier:CellIdentifier];
-    
     [self setTitle:@"Course Search"];
+    
+    [self.tableView registerClass:[CourseCell class] forCellReuseIdentifier:CellIdentifier];
     
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     [searchBar setDelegate:self];
     [self.tableView setTableHeaderView:searchBar];
-    
-    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -75,7 +92,49 @@ static NSString *CellIdentifier = @"Cell";
 
 -(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[self.courseSearchData filterAtIndex:section] description];
+    // title is actually set in viewForHeaderInSection function
+    return @"Section Header";
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 66;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0,0,tableView.frame.size.width,66)];
+    headerView.backgroundColor=[UIColor clearColor];
+ 
+    UILabel *titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(15, 0, headerView.frame.size.width - 30, 66)];
+    titleLabel.backgroundColor=[UIColor clearColor];
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    titleLabel.numberOfLines = 0;
+    titleLabel.text = [[self.courseSearchData filterAtIndex:section] description];
+ 
+    [headerView addSubview:titleLabel];
+ 
+    return headerView;
+}
+
+- (IBAction) favoriteClicked:(UIButtonWithIndexPath *) favoriteButton
+{
+    NSIndexPath *indexPath = favoriteButton.indexPath;
+    Course* course = [self.courseSearchData courseNumber:[indexPath row] atIndex:[indexPath section]];
+    if (favoriteButton.selected) {
+        [self.courseFavoriteData removeCourse:course];
+        favoriteButton.selected = NO;
+    }
+    else {
+        [self.courseFavoriteData addCourse:course];
+        favoriteButton.selected = YES;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,8 +143,27 @@ static NSString *CellIdentifier = @"Cell";
     
     Course *curCourse = [self.courseSearchData courseNumber:[indexPath row] atIndex:[indexPath section]];
     
+    UIImage *blankImage = [UIImage imageNamed:@"blank.png"];
+    
+    [cell.imageView setImage:blankImage];
+
     [cell.textLabel setText:[curCourse subjectWithNumber]];
     [cell.detailTextLabel setText:[curCourse title]];
+    
+    UIImage *starImage = [UIImage imageNamed:@"star.png"];
+    UIImage *emptyStarImage = [UIImage imageNamed:@"star_empty.png"];
+    
+    UIButtonWithIndexPath *favoriteButton = [[UIButtonWithIndexPath alloc] initWithFrame:CGRectMake(22, 8, 24, 24) andIndexPath:indexPath];
+    
+    [favoriteButton setImage:emptyStarImage forState:UIControlStateNormal];
+    [favoriteButton setImage:starImage forState:UIControlStateSelected];
+    [favoriteButton addTarget:self action:@selector(favoriteClicked:) forControlEvents:UIControlEventTouchDown];
+
+    [cell addSubview:favoriteButton];
+    
+
+
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
@@ -107,59 +185,8 @@ static NSString *CellIdentifier = @"Cell";
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Course *course = [self.courseSearchData courseNumber:[indexPath row] atIndex:[indexPath section]];
-    CourseDetailViewController *courseDetail = [[CourseDetailViewController alloc] initWithCourse:course andStyle:UITableViewStylePlain];
+    CourseDetailViewController *courseDetail = [[CourseDetailViewController alloc] initWithCourse:course];
     [self.navigationController pushViewController:courseDetail animated:YES];
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 @end

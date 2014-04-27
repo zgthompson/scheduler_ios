@@ -11,6 +11,8 @@
 
 @interface Course : NSObject
 
+@property (nonatomic) NSDictionary *courseDict;
+
 -(instancetype) initWithDict:(NSDictionary *) courseDict;
 -(NSString *) title;
 -(NSString *) subjectWithNumber;
