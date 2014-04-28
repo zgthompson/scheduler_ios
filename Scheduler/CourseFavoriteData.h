@@ -20,6 +20,7 @@
 -(Course *) courseAtIndex:(int) index;
 -(void) addCourse:(Course *) course;
 -(void) removeCourse:(Course *) course;
+-(BOOL) savedCoursesIncludesCourse:(Course *) course;
 
 @end
 

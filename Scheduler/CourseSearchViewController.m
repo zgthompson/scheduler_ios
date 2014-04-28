@@ -33,21 +33,7 @@ static NSString *CellIdentifier = @"Cell";
         [self.courseSearchData setDelegate:self];
         
         self.courseFavoriteData = [CourseFavoriteData sharedInstance];
-        
-        UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:1];
-        [tabBarItem setTitle:@"Course Search"];
-        [self setTabBarItem:tabBarItem];
     }
-    return self;
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        self.courseSearchData = [CourseSearchData sharedInstance];
-        [self.courseSearchData setDelegate:self];
-        }
     return self;
 }
 
@@ -55,19 +41,26 @@ static NSString *CellIdentifier = @"Cell";
 {
     [super viewDidLoad];
     
-    [self setTitle:@"Course Search"];
-    
     [self.tableView registerClass:[CourseCell class] forCellReuseIdentifier:CellIdentifier];
     
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     [searchBar setDelegate:self];
     [self.tableView setTableHeaderView:searchBar];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:1];
+    [self setTabBarItem:tabBarItem];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    tapGesture.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGesture];
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    self.tabBarController.navigationItem.title = @"Search Courses";
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -147,7 +140,7 @@ static NSString *CellIdentifier = @"Cell";
     
     [cell.imageView setImage:blankImage];
 
-    [cell.textLabel setText:[curCourse subjectWithNumber]];
+    [cell.textLabel setText:[curCourse description]];
     [cell.detailTextLabel setText:[curCourse title]];
     
     UIImage *starImage = [UIImage imageNamed:@"star.png"];
@@ -161,6 +154,10 @@ static NSString *CellIdentifier = @"Cell";
 
     [cell addSubview:favoriteButton];
     
+    if ([self.courseFavoriteData savedCoursesIncludesCourse:curCourse]) {
+        favoriteButton.selected = YES;
+    }
+    
 
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -168,11 +165,16 @@ static NSString *CellIdentifier = @"Cell";
     return cell;
 }
 
-#pragma mark - Search submission
+#pragma mark - Search submission / keyboard hiding
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.courseSearchData coursesForQuery:[searchBar text]];
     [searchBar resignFirstResponder];
+}
+
+-(void)hideKeyboard
+{
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Course Search Data Delegate methods

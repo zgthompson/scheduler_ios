@@ -11,6 +11,7 @@
 @interface CourseFavoriteData ()
 
 @property NSMutableArray *courses;
+@property NSMutableDictionary *coursesDict;
 
 @end
 
@@ -22,9 +23,19 @@
     static CourseFavoriteData *instance = nil;
     if (! instance) {
         instance = [[CourseFavoriteData alloc] init];
-        [instance loadCourses];
     }
     return instance;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.courses = [NSMutableArray array];
+        self.coursesDict = [NSMutableDictionary dictionary];
+        [self loadCourses];
+    }
+    return self;
 }
 
 -(int) courseCount
@@ -38,35 +49,44 @@
 }
 -(void) addCourse:(Course *) course
 {
-    if (![self isInCourses:course]) {
-        [self.courses addObject:course];
-        [self saveCourses];
-        [self.delegate courseFavoriteDataUpdated];
+    if (![self savedCoursesIncludesCourse:course]) {
+        [self addNewCourse:course];
     }
 }
+
+-(void) addNewCourse:(Course *) course
+{
+    [self.courses addObject:course];
+    [self.coursesDict setObject:course forKey:[course subjectWithNumber]];
+    [self saveCourses];
+    [self.delegate courseFavoriteDataUpdated];
+}
+
 -(void) removeCourse:(Course *) course
 {
-    NSString *removeSubjectWithNumber = course.subjectWithNumber;
-    for (Course* curCourse in self.courses) {
-        if ([removeSubjectWithNumber isEqualToString:[curCourse subjectWithNumber]]) {
-            [self.courses removeObject:curCourse];
-            [self saveCourses];
-            [self.delegate courseFavoriteDataUpdated];
-            return;
-        }
+    Course *currentCourse = [self.coursesDict objectForKey:[course subjectWithNumber]];
+    if (currentCourse) {
+        [self removeCurrentCourse:currentCourse];
     }
 }
-        
--(BOOL) isInCourses:(Course *) course
+
+-(void) removeCurrentCourse:(Course *) course
 {
-    NSPredicate *subjectWithNumberMatch = [NSPredicate predicateWithFormat:@"subjectWithNumber == '%@'", course.subjectWithNumber];
-    return [[self.courses filteredArrayUsingPredicate:subjectWithNumberMatch] count] > 0;
+    [self.courses removeObject:course];
+    [self.coursesDict removeObjectForKey:[course subjectWithNumber]];
+    [self saveCourses];
+    [self.delegate courseFavoriteDataUpdated];
+}
+
+-(BOOL) savedCoursesIncludesCourse:(Course *) course
+{
+    //NSLog(@"includes course? %@", [course subjectWithNumber]);
+    //NSLog(@"%@", [self.coursesDict objectForKey:[course subjectWithNumber]]);
+    return !![self.coursesDict objectForKey:[course subjectWithNumber]];
 }
 
 -(void) loadCourses
 {
-    self.courses = [NSMutableArray array];
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *courseFile = [documentsDirectory stringByAppendingPathComponent:@"savedCourses.json"];
@@ -75,7 +95,9 @@
     if (jsonData) {
         NSArray *loadedCourseDicts = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
         for (NSDictionary *courseDict in loadedCourseDicts) {
-            [self.courses addObject:[[Course alloc] initWithDict:courseDict]];
+            Course *newCourse = [[Course alloc] initWithDict:courseDict];
+            [self.courses addObject:newCourse];
+            [self.coursesDict setObject:newCourse forKey:[newCourse subjectWithNumber]];
         }
     }
 }

@@ -43,7 +43,9 @@ static NSString *CellIdentifier = @"Cell";
     
     [self.tableView registerClass:[CourseCell class] forCellReuseIdentifier:CellIdentifier];
     
-    [self setTitle:[self.course subjectWithNumber]];
+    [self setTitle:[self.course description]];
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

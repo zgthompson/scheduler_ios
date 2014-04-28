@@ -30,7 +30,7 @@ static NSString *CellIdentifier = @"Cell";
         [self.courseFavoriteData setDelegate:self];
         
         UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:2];
-        [tabBarItem setTitle:@"Saved Courses"];
+
         [self setTabBarItem:tabBarItem];
     }
     return self;
@@ -40,21 +40,16 @@ static NSString *CellIdentifier = @"Cell";
 {
     [super viewDidLoad];
     
-    [self setTitle:@"Saved Courses"];
-    
     [self.tableView registerClass:[CourseCell class] forCellReuseIdentifier:CellIdentifier];
     
     self.tableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0);
-    /*
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    [self.tableView setTableHeaderView:headerView];
-     */
+    
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    self.tabBarController.navigationItem.title = @"Saved Courses";
+    self.tabBarController.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,7 +82,7 @@ static NSString *CellIdentifier = @"Cell";
     
     Course *curCourse = [self.courseFavoriteData courseAtIndex:[indexPath row]];
     
-    [cell.textLabel setText:[curCourse subjectWithNumber]];
+    [cell.textLabel setText:[curCourse description]];
     [cell.detailTextLabel setText:[curCourse title]];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -105,6 +100,12 @@ static NSString *CellIdentifier = @"Cell";
 -(void) courseFavoriteDataUpdated
 {
     [self.tableView reloadData];
+}
+
+-(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Course *courseToDelete = [self.courseFavoriteData courseAtIndex:[indexPath row]];
+    [self.courseFavoriteData removeCourse:courseToDelete];
 }
 
 

@@ -36,6 +36,24 @@
     return [self.courseDict objectForKey:@"units"];
 }
 
+-(NSString *) geCode
+{
+    return [self.courseDict objectForKey:@"ge_code"];
+}
+
+-(NSString *) description
+{
+    NSString *geCodeString = [self geCode];
+    
+    if ([geCodeString length] > 0) {
+        NSArray *stringBuilder = @[@" ", @"(", geCodeString, @")"];
+        return [[self subjectWithNumber] stringByAppendingString:[stringBuilder componentsJoinedByString:@""]];
+    }
+    else {
+        return [self subjectWithNumber];
+    }
+}
+
 -(int) classCount
 {
     return [[self.courseDict objectForKey:@"classes"] count];
