@@ -83,7 +83,7 @@ static NSString *CellIdentifier = @"Cell";
     return [self.courseSearchData courseCountAtIndex:section];
 }
 
--(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     // title is actually set in viewForHeaderInSection function
     return @"Section Header";
@@ -91,7 +91,13 @@ static NSString *CellIdentifier = @"Cell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 66;
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,tableView.frame.size.width - 20, 0)];
+    titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    titleLabel.numberOfLines = 0;
+    titleLabel.text = [[self.courseSearchData filterAtIndex:section] description];
+    [titleLabel sizeToFit];
+    
+    return titleLabel.frame.size.height + 10;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -101,18 +107,21 @@ static NSString *CellIdentifier = @"Cell";
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0,0,tableView.frame.size.width,66)];
-    headerView.backgroundColor=[UIColor clearColor];
- 
-    UILabel *titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(15, 0, headerView.frame.size.width - 30, 66)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,0,tableView.frame.size.width - 20, 0)];
+    titleLabel.numberOfLines = 0;
     titleLabel.backgroundColor=[UIColor clearColor];
     titleLabel.textColor = [UIColor blackColor];
     titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    titleLabel.numberOfLines = 0;
     titleLabel.text = [[self.courseSearchData filterAtIndex:section] description];
- 
+    [titleLabel sizeToFit];
+    CGRect textSize = titleLabel.frame;
+    titleLabel.bounds = textSize;
+    titleLabel.frame = CGRectOffset(textSize, 0, 5);
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectOffset(textSize, 0, 10)];
+    headerView.backgroundColor = [UIColor clearColor];
     [headerView addSubview:titleLabel];
- 
+    
     return headerView;
 }
 
