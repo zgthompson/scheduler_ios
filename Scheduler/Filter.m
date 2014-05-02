@@ -1,3 +1,4 @@
+// Zachary Thompson
 //
 //  Filter.m
 //  Scheduler

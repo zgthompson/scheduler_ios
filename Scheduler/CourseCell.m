@@ -1,3 +1,4 @@
+// Zachary Thompson
 //
 //  CourseCell.m
 //  Scheduler

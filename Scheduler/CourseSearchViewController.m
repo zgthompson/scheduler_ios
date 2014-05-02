@@ -1,3 +1,4 @@
+// Zachary Thompson
 //
 //  CourseSearchViewController.m
 //  Scheduler

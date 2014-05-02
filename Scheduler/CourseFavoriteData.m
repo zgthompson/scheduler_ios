@@ -1,3 +1,4 @@
+// Zachary Thompson
 //
 //  CourseFavoriteData.m
 //  Scheduler

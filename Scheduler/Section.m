@@ -1,3 +1,4 @@
+// Zachary Thompson
 //
 //  Section.m
 //  Scheduler

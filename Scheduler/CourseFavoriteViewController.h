@@ -1,3 +1,4 @@
+// Zachary Thompson
 //
 //  CourseFavoriteViewController.h
 //  Scheduler
